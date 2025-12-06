@@ -1,84 +1,1355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>QF-LOG: QKD Forensic Dataset</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>Madhab Chandra Das | Cybersecurity & Digital Forensics Researcher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Personal website of Madhab Chandra Das – Graduate Research Assistant, Teaching Assistant, and Lab Assistant focusing on cybersecurity, digital forensics, ethical hacking, penetration testing, IoT/CPS, and AI-driven threat analysis." />
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background:#020617; color:#e5e7eb; }
-    header { background:#0f172a; padding:20px; text-align:center; border-bottom:1px solid #1f2937; }
-    h1 { margin:0; font-size:28px; }
-    h2 { border-bottom:1px solid #1f2937; padding-bottom:4px; margin-top:24px; }
-    main { max-width:960px; margin:0 auto; padding:24px; }
-    a { color:#38bdf8; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    code { background:#020617; padding:2px 4px; border-radius:4px; }
-    .badge-row span { display:inline-block; margin:4px 6px; padding:4px 8px; border-radius:12px; background:#111827; font-size:12px;}
-    footer { text-align:center; padding:16px; font-size:12px; color:#9ca3af; border-top:1px solid #111827; margin-top:32px;}
-    ul { line-height:1.6; }
-    pre { background:#020617; padding:10px; border-radius:8px; overflow-x:auto; }
+    :root {
+      --bg-page: #f3f4f6;
+      --bg-hero: #e5edff;
+      --bg-card: #ffffff;
+      --border-card: #e5e7eb;
+      --text-main: #111827;
+      --text-soft: #4b5563;
+      --accent: #1d4ed8;
+      --accent-soft: #2563eb;
+      --accent-light: #dbeafe;
+      --radius: 10px;
+      --radius-lg: 14px;
+      --shadow-soft: 0 12px 28px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Header / nav */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      gap: 12px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #60a5fa, #1d4ed8 60%, #1f2937);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text span:first-child {
+      font-weight: 600;
+      font-size: 15px;
+      color: #111827;
+    }
+
+    .logo-text span:last-child {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      font-size: 14px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #4b5563;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-cta {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #cbd5f5;
+      background: #eff4ff;
+      color: #1d4ed8 !important;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .nav-cta:hover {
+      background: #e0ebff;
+    }
+
+    .burger {
+      display: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+    }
+
+    .burger-line {
+      width: 18px;
+      height: 2px;
+      background: #374151;
+      border-radius: 999px;
+      position: relative;
+    }
+
+    .burger-line::before,
+    .burger-line::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 2px;
+      background: #374151;
+      border-radius: 999px;
+      left: 0;
+    }
+
+    .burger-line::before {
+      top: -5px;
+    }
+
+    .burger-line::after {
+      top: 5px;
+    }
+
+    .mobile-nav {
+      display: none;
+      border-top: 1px solid #e5e7eb;
+      background: #ffffff;
+    }
+
+    .mobile-nav.open {
+      display: block;
+    }
+
+    .mobile-nav-inner {
+      padding: 8px 0 10px;
+      display: grid;
+      gap: 4px;
+      font-size: 14px;
+    }
+
+    .mobile-nav-inner a {
+      padding: 4px 0;
+      color: #4b5563;
+    }
+
+    .mobile-nav-inner a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero */
+
+    .hero {
+      background: linear-gradient(135deg, #e5edff, #eef2ff);
+      border-bottom: 1px solid #d1d5f0;
+      padding: 32px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-size: 13px;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+
+    .hero-kicker span.role {
+      padding: 3px 9px;
+      background: #ffffff;
+      border-radius: 999px;
+      border: 1px solid #d1d5f0;
+      margin-right: 4px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      line-height: 1.3;
+      color: #0b1120;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(90deg, #1d4ed8, #0ea5e9);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle strong {
+      color: #111827;
+    }
+
+    .hero-roles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #c7d2fe;
+      background: #e0ebff;
+      font-size: 13px;
+      color: #1e3a8a;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 7px 16px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #1d4ed8, #2563eb);
+      color: #ffffff;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #1e40af, #1d4ed8);
+      text-decoration: none;
+    }
+
+    .btn-ghost {
+      background: #ffffff;
+      color: #1d4ed8;
+      border-color: #c7d2fe;
+    }
+
+    .btn-ghost:hover {
+      background: #eef2ff;
+      text-decoration: none;
+    }
+
+    .hero-note-small {
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    .hero-panel {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 16px 18px 18px;
+      border: 1px solid #d1d5f0;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-panel-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+
+    .hero-panel-sub {
+      font-size: 13px;
+      color: #4b5563;
+      margin-bottom: 12px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .tag-chip {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #eff6ff;
+      border: 1px solid #d1e0ff;
+      color: #1d4ed8;
+    }
+
+    .hero-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .mini-card {
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      padding: 8px 9px;
+      font-size: 12px;
+    }
+
+    .mini-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #6b7280;
+      margin-bottom: 2px;
+    }
+
+    .mini-main {
+      font-weight: 600;
+      margin-bottom: 2px;
+      color: #111827;
+    }
+
+    .mini-sub {
+      color: #6b7280;
+      font-size: 11px;
+    }
+
+    .hero-panel-note {
+      font-size: 12px;
+      color: #4b5563;
+      margin-top: 4px;
+    }
+
+    /* Sections */
+
+    main {
+      padding: 26px 0 32px;
+    }
+
+    section {
+      margin-bottom: 24px;
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-card);
+      padding: 22px 20px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-header {
+      margin-bottom: 14px;
+    }
+
+    .section-kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #6b7280;
+      margin-bottom: 2px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    /* Layout grids */
+
+    .split-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.1fr);
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      border: 1px solid #e5e7eb;
+      padding: 14px 14px;
+      font-size: 14px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+
+    .card-meta {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .card ul {
+      padding-left: 18px;
+      margin-top: 4px;
+    }
+
+    .card ul li {
+      margin-bottom: 3px;
+    }
+
+    /* News section */
+
+    .news-item {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-left: 5px solid var(--accent);
+    }
+
+    .news-item h3 {
+      margin: 0;
+      font-size: 15px;
+      color: var(--accent);
+    }
+
+    .news-item p {
+      margin: 4px 0 2px;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    .news-item small {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    /* Lists */
+
+    .list-bullets {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .list-bullets li {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .list-dot {
+      width: 6px;
+      height: 6px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Projects */
+
+    .project-meta {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 4px;
+      font-size: 11px;
+    }
+
+    .tag {
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      color: #374151;
+    }
+
+    /* Contact */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .contact-details {
+      font-size: 14px;
+      color: #374151;
+      margin-bottom: 10px;
+    }
+
+    .contact-details div {
+      margin-bottom: 6px;
+    }
+
+    .contact-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #6b7280;
+    }
+
+    .social-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .social-chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      font-size: 13px;
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+
+    .social-chip:hover {
+      background: #e5edff;
+      text-decoration: none;
+    }
+
+    .contact-right {
+      background: #f9fafb;
+      border-radius: var(--radius);
+      border: 1px dashed #d1d5db;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #374151;
+    }
+
+    /* Footer */
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 10px 0 14px;
+      background: #ffffff;
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 880px) {
+      .hero-grid,
+      .split-2,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+
+      .hero-panel {
+        margin-top: 6px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+      .burger {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 23px;
+      }
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
   </style>
 </head>
 <body>
-<header>
-  <h1>QF-LOG: Quantum Forensic Dataset for QKD Networks</h1>
-  <p>by Madhab Chandra Das &middot; Quantum Forensics Framework</p>
-</header>
-<main>
-  <section>
-    <h2>Overview</h2>
-    <p>
-      QF-LOG is a physics-informed forensic dataset for attack detection in Quantum Key Distribution (QKD) networks.
-      It captures realistic behaviour for four scenarios:
-      <code>normal</code>, <code>intercept_resend</code>, <code>detector_blind</code>, and <code>fiber_tap</code>.
-    </p>
-    <div class="badge-row">
-      <span>50,000 samples (tabular)</span>
-      <span>Time-series LSTM version</span>
-      <span>4 attack classes</span>
-      <span>QBER · photon_count · latency · abort_flag</span>
+<div class="page">
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="logo">
+          <div class="logo-mark" aria-hidden="true"></div>
+          <div class="logo-text">
+            <span>Madhab Chandra Das</span>
+            <span>Cybersecurity & Digital Forensics</span>
+          </div>
+        </div>
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#news">News</a>
+          <a href="#research">Research</a>
+          <a href="#publications">Publications</a>
+          <a href="#teaching">Teaching</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+          <a href="#contact" class="nav-cta">Let’s connect</a>
+        </nav>
+        <button class="burger" id="burger" aria-label="Toggle navigation">
+          <div class="burger-line"></div>
+        </button>
+      </div>
+      <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-inner">
+          <a href="#about">About</a>
+          <a href="#news">News</a>
+          <a href="#research">Research</a>
+          <a href="#publications">Publications</a>
+          <a href="#teaching">Teaching</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-kicker">
+            <span class="role">Graduate Research Assistant</span>
+            <span class="role">Teaching Assistant</span>
+            <span class="role">Lab Assistant</span>
+          </div>
+          <h1 class="hero-title">
+            I investigate how <span class="highlight">digital traces</span> emerge in systems designed to leave none—advancing forensic science for anonymous networks, intelligent devices, and next-generation cyber threats.
+          </h1>
+          <p class="hero-subtitle">
+            I am <strong>Madhab Chandra Das</strong>, working at the intersection of
+            <strong>digital forensics, cybersecurity, ethical hacking, penetration testing, and machine learning</strong> —
+            analyzing anonymous search engines and onion-based networks, cyber-physical systems (CPS), and developing AI-driven tools to detect phishing, malicious activity, and ransomware.
+          </p>
+          <div class="hero-roles">
+            <div class="pill">Graduate Research Assistant</div>
+            <div class="pill">Teaching Assistant</div>
+            <div class="pill">Lab Assistant</div>
+          </div>
+          <div class="hero-actions">
+            <a href="#research" class="btn btn-primary">🔍 Explore research focus</a>
+            <a href="Madhab_Chandra_Das_CV.pdf" class="btn btn-ghost" target="_blank">📄 Download CV</a>
+          </div>
+          <p class="hero-note-small">
+            Focused on demonstrating that “anonymous” and “low-visibility” systems are not fully anonymous from a forensic perspective, and on building tools that help investigators extract scientifically grounded evidence.
+          </p>
+        </div>
+
+        <aside class="hero-panel">
+          <div class="hero-panel-title">Current academic status</div>
+          <p class="hero-panel-sub">
+            Cybersecurity &amp; digital forensics researcher with experience in ML/DL-based threat detection, IoT/CPS, and e-commerce forensics.
+          </p>
+          <div class="hero-tags">
+            <span class="tag-chip">Anonymous search engines</span>
+            <span class="tag-chip">Onion-based networks</span>
+            <span class="tag-chip">IoT & CPS forensics</span>
+            <span class="tag-chip">E-commerce platforms</span>
+            <span class="tag-chip">Phishing & ransomware</span>
+            <span class="tag-chip">LLM-based tools</span>
+            <span class="tag-chip">Ethical hacking</span>
+            <span class="tag-chip">Penetration testing</span>
+          </div>
+          <div class="hero-mini-grid">
+            <div class="mini-card">
+              <div class="mini-label">Current program</div>
+              <div class="mini-main">PhD in Digital & Cyber Forensics</div>
+              <div class="mini-sub">Sam Houston State University · Graduate Assistant</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-label">Completed</div>
+              <div class="mini-main">MS in Cybersecurity (3.92 / 4.00)</div>
+              <div class="mini-sub">Washington University of Science and Technology</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-label">Background</div>
+              <div class="mini-main">MBA &amp; BSc in EEE</div>
+              <div class="mini-sub">Jahangirnagar University · UITS, Dhaka</div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-label">Research metrics</div>
+              <div class="mini-main">8+ publications, 200+ citations</div>
+              <div class="mini-sub">Google Scholar: h-index 8, i10-index 7</div>
+            </div>
+          </div>
+          <p class="hero-panel-note">
+            Profiles:
+            <a href="https://www.linkedin.com/in/madhab-chandra-das-b1023841" target="_blank" rel="noopener noreferrer">LinkedIn</a> ·
+            <a href="https://scholar.google.com/citations?hl=en&user=5Te6-LAAAAAJ&view_op=list_works" target="_blank" rel="noopener noreferrer">Google Scholar</a> ·
+            <a href="https://www.researchgate.net/profile/Madhab-Chandra-Das-2" target="_blank" rel="noopener noreferrer">ResearchGate</a>
+          </p>
+        </aside>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>Files</h2>
-    <ul>
-      <li><strong>full_qkd_dataset_realistic_50000.csv</strong> – 50k frame-level QKD logs</li>
-      <li><strong>qkd_timeseries_lstm_v2.csv</strong> – 1,000 sessions &times; 50 frames for LSTM / 1D-CNN</li>
-      <li><strong>GitHub repo:</strong> <a href="https://github.com/MadhabCD/QKD-Forensic-Dataset" target="_blank">QKD-Forensic-Dataset</a></li>
-    </ul>
-  </section>
+  <main>
+    <div class="container">
 
-  <section>
-    <h2>Feature Schema</h2>
-    <pre><code>qber           float   Quantum Bit Error Rate per frame
-photon_count   int     Photon detection count
-latency_ms     float   Classical processing latency
-abort_flag     int     0 = OK, 1 = Abort
-label          string  normal / intercept_resend / detector_blind / fiber_tap
+      <!-- About -->
+      <section id="about">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-kicker">About</div>
+            <h2 class="section-title">Profile</h2>
+            <p class="section-subtitle">
+              Researcher, educator, and practitioner in cybersecurity, digital forensics, ethical hacking, penetration testing, IoT/CPS, and AI-driven threat analysis.
+            </p>
+          </div>
 
-(session-based v2)
-session_id     int     QKD session index
-frame_index    int     Frame position within the session</code></pre>
-  </section>
+          <div class="split-2">
+            <div>
+              <p>
+                I serve as a <strong>Graduate Research Assistant</strong>, <strong>Teaching Assistant</strong>, and <strong>Lab Assistant</strong>, contributing to both research and instruction in cybersecurity and digital forensics. My training spans <strong>electrical and electronic engineering, business,</strong> and <strong>cybersecurity</strong>, enabling me to connect low-level systems, organizational risk, and advanced analytics.
+              </p>
+              <p style="margin-top:8px;">
+                My work centers on <strong>forensic analysis of anonymous search engines, onion-based networks and browsers, and cyber-physical systems (CPS)</strong>. I design and apply <strong>machine learning and deep learning models</strong>
+                for phishing, malicious traffic, and ransomware, and I am actively exploring <strong>forensic tool development using LLMs and Generative AI</strong>. In parallel, I investigate <strong>digital evidence in e-commerce platforms</strong> such as Temu, AliExpress, and Shein, and study how accident detection can be automated from CCTV streams using YOLO-based models.
+              </p>
 
-  <section>
-    <h2>Citation</h2>
-    <p>If you use this dataset, please cite:</p>
-    <pre><code>Das, M. C., "QF-LOG: A Machine Learning Forensic Dataset for QKD Networks", 2025.</code></pre>
-  </section>
+              <div class="card" style="margin-top:10px;">
+                <div class="card-title">Research experience (highlights)</div>
+                <ul>
+                  <li>Diminishing error in real-time data for malware and ransomware detection using machine learning models.</li>
+                  <li>Machine learning approaches to detect human diseases using multi-disease datasets.</li>
+                </ul>
+              </div>
 
-  <section>
-    <h2>Contact</h2>
-    <p>
-      For questions or collaboration on Quantum Forensics and QKD security, please contact:
-      <br>
-      <strong>Email:</strong> madhabdas.2109@gmail.com
-    </p>
-  </section>
-</main>
-<footer>
-  &copy; 2025 Madhab Chandra Das · QF-LOG Dataset · Hosted on GitHub Pages
-</footer>
+              <div class="card" style="margin-top:10px;">
+                <div class="card-title">Honors & awards</div>
+                <ul>
+                  <li>WUST Presidential Honor Certificate (Jan 2025)</li>
+                  <li>WUST Academic Honor Certificate for 2024 Summer</li>
+                  <li>Scholarship for Outstanding Result in MSCS – WUST (2024)</li>
+                  <li>Scholarship for Outstanding Result in BSc – UITS (2009 &amp; 2010)</li>
+                  <li>Innovative Idea Award – UITS Scientific Fair, Dhaka</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="cards-grid">
+              <div class="card">
+                <div class="card-title">Education</div>
+                <div class="card-meta">Degrees & academic training</div>
+                <ul>
+                  <li><strong>PhD in Digital and Cyber Forensics</strong>, Sam Houston State University · Graduate Assistant</li>
+                  <li><strong>Master’s in Cybersecurity</strong>, WUST · CGPA 3.92 / 4.00</li>
+                  <li><strong>MBA</strong>, Jahangirnagar University · CGPA 3.13 / 4.00</li>
+                  <li><strong>BSc in Electrical and Electronic Engineering (EEE)</strong>, UITS · CGPA 3.83 / 4.00</li>
+                </ul>
+              </div>
+              <div class="card">
+                <div class="card-title">Training & certifications</div>
+                <ul>
+                  <li>Cybersecurity and Risk Management Specialist – People Teach Institute of IT, USA</li>
+                  <li>Artificial Intelligence for Cybersecurity – LinkedIn Learning</li>
+                  <li>Oracle Cloud Infrastructure Foundations – LinkedIn Learning</li>
+                  <li>AWS Cloud Essentials – LinkedIn Learning</li>
+                  <li>Peer review training (Introduction to Peer Review; Typical Peer Review Process)</li>
+                  <li>PRINCE2 Fundamentals – Global Skill Development</li>
+                  <li>Renewable Energy & Its Application – University of Dhaka</li>
+                </ul>
+              </div>
+              <div class="card">
+                <div class="card-title">Top skills & languages</div>
+                <ul>
+                  <li><strong>Cybersecurity / DFIR:</strong> digital forensic investigation, ethical hacking, penetration testing, ML for digital forensics</li>
+                  <li><strong>Core skills:</strong> peer reviews, risk management, Active Directory</li>
+                  <li><strong>Soft skills:</strong> team management, mentoring, motivational speaking</li>
+                  <li><strong>Languages:</strong> Bangla (native), English (professional), Hindi (elementary)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- News -->
+      <section id="news">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-kicker">News</div>
+            <h2 class="section-title">News & Announcements</h2>
+            <p class="section-subtitle">
+              Latest updates from my research, teaching, and professional activities. You can share this section link (<code>#news</code>) directly in posts or emails.
+            </p>
+          </div>
+
+          <!-- NEWS ITEMS – You can edit these anytime -->
+          <div class="news-item">
+            <h3>📢 In-progress: E-commerce Forensics on Temu, AliExpress, and Shein</h3>
+            <p>
+              I am currently analyzing how popular e-commerce platforms leave forensic traces across devices and network traffic, with a focus on privacy, tracking, and evidence collection.
+            </p>
+            <small>Updated: January 2025</small>
+          </div>
+
+          <div class="news-item">
+            <h3>📢 YOLO-11 Live Accident Detection on CCTV Streams</h3>
+            <p>
+              Ongoing work on real-time detection of accidents and hazardous events from CCTV using YOLO-11, focusing on reliable detection, bounding boxes, and potential alerting strategies.
+            </p>
+            <small>Updated: January 2025</small>
+          </div>
+
+          <div class="news-item">
+            <h3>📢 Comparative Analysis of Digital Forensic Tools</h3>
+            <p>
+              I am benchmarking multiple forensic tools (e.g., Autopsy, FTK Imager, CAINE) to compare efficiency, artefact coverage, and practical usability for investigators.
+            </p>
+            <small>Updated: January 2025</small>
+          </div>
+
+          <p style="font-size:13px; color:#6b7280; margin-top:8px;">
+            To share a specific update on LinkedIn or elsewhere, you can include a link such as:
+            <code>https://YOUR-DOMAIN/#news</code> so visitors land directly on this section and can explore your full profile.
+          </p>
+        </div>
+      </section>
+
+      <!-- Research -->
+      <section id="research">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-kicker">Research</div>
+            <h2 class="section-title">Research areas & interests</h2>
+            <p class="section-subtitle">
+              Unifying forensic science, cybersecurity, and intelligent modeling to analyze complex “anonymous” and resource-constrained environments.
+            </p>
+          </div>
+
+          <div class="cards-grid">
+            <div class="card">
+              <div class="card-title">Digital forensics of anonymous services</div>
+              <div class="card-meta">Anonymous search engines & onion-based networks</div>
+              <p>
+                Forensic analysis of anonymous search engines, onion-based networks (e.g., Tor), and privacy-oriented browsers to understand what evidence can be collected and how anonymity degrades in practice.
+              </p>
+              <div class="tags">
+                <span class="tag">Tor & onion routing</span>
+                <span class="tag">Anonymous search</span>
+                <span class="tag">Browser artefacts</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">E-commerce forensics</div>
+              <div class="card-meta">Temu, AliExpress, Shein</div>
+              <p>
+                Studying evidence sources and trace patterns in cross-border e-commerce platforms to support investigations into fraud, abuse, and privacy violations.
+              </p>
+              <div class="tags">
+                <span class="tag">Temu</span>
+                <span class="tag">AliExpress</span>
+                <span class="tag">Shein</span>
+                <span class="tag">Platform forensics</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">IoT & CPS forensics</div>
+              <div class="card-meta">Evidence in constrained systems</div>
+              <p>
+                Evidence acquisition and analysis in IoT and cyber-physical systems, with emphasis on embedded memory, distributed telemetry, and multi-device event reconstruction.
+              </p>
+              <div class="tags">
+                <span class="tag">IoT</span>
+                <span class="tag">CPS</span>
+                <span class="tag">Embedded forensics</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">ML & DL for cyber threats</div>
+              <div class="card-meta">Phishing, malicious traffic, ransomware</div>
+              <p>
+                Machine learning and deep learning models for detecting phishing, malicious network traffic, malware, and ransomware, focusing on robustness and interpretability.
+              </p>
+              <div class="tags">
+                <span class="tag">Threat detection</span>
+                <span class="tag">Phishing</span>
+                <span class="tag">Ransomware</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Ethical hacking & penetration testing</div>
+              <div class="card-meta">Offensive security for better defense</div>
+              <p>
+                Exploring offensive techniques to evaluate network, web application, and system vulnerabilities through controlled penetration testing and red-team style exercises.
+              </p>
+              <div class="tags">
+                <span class="tag">Pen-testing</span>
+                <span class="tag">Web exploits</span>
+                <span class="tag">OWASP</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">LLM & AI-driven forensic tooling</div>
+              <div class="card-meta">LLM-assisted DFIR workflows</div>
+              <p>
+                Using LLMs, ML, and Generative AI to support evidence triage, artefact correlation, and report generation while keeping investigators in full control of decisions.
+              </p>
+              <div class="tags">
+                <span class="tag">LLM tools</span>
+                <span class="tag">Automated reports</span>
+                <span class="tag">Human-in-the-loop</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Publications -->
+      <section id="publications">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-kicker">Publications</div>
+            <h2 class="section-title">Selected research outputs</h2>
+            <p class="section-subtitle">
+              A sample of my published and in-progress work. For full details, please visit my Google Scholar and ResearchGate profiles.
+            </p>
+          </div>
+
+          <div class="cards-grid">
+            <div class="card">
+              <div class="card-title">In-progress research (2024–present)</div>
+              <div class="card-meta">Ongoing projects</div>
+              <ul>
+                <li>Diminishing error in real-time data for malware and ransomware detection using ML models.</li>
+                <li>Forensic analysis of Temu, AliExpress, and Shein e-commerce platforms.</li>
+                <li>Deep learning leaf multiple disease detection.</li>
+                <li>YOLO-11 live accident object detection from CCTV.</li>
+                <li>Comparative analysis of digital forensic tool efficiency.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Machine learning for disease prediction</div>
+              <div class="card-meta">Health-related ML</div>
+              <p>
+                Works on predicting heart disease, stroke, breast cancer, and chronic kidney disease from clinical and survey datasets, using comparative model evaluation and early detection strategies.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Deep learning for medical imaging & virology</div>
+              <div class="card-meta">CT scans · Nipah proteins</div>
+              <p>
+                Contributions to transfer learning models for COVID-19 detection from CT scans, deep learning for chest cancer prognosis, and computational characterization of Nipah virus proteins.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Microgrids, renewable energy & power systems</div>
+              <div class="card-meta">Early engineering work</div>
+              <p>
+                Published work on hybrid PV–wind microgrids, energy storage sizing, energy management in RES-powered DC microgrids, and advanced control strategies in power systems.
+              </p>
+            </div>
+          </div>
+
+          <p style="font-size:13px; color:#6b7280; margin-top:10px;">
+            Full publication list:
+            <a href="https://scholar.google.com/citations?hl=en&user=5Te6-LAAAAAJ&view_op=list_works" target="_blank" rel="noopener noreferrer">Google Scholar</a> ·
+            <a href="https://www.researchgate.net/profile/Madhab-Chandra-Das-2" target="_blank" rel="noopener noreferrer">ResearchGate</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- Teaching & Service -->
+      <section id="teaching">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-kicker">Teaching & Service</div>
+            <h2 class="section-title">Academic responsibilities</h2>
+            <p class="section-subtitle">
+              Supporting students through teaching, labs, and mentoring, while contributing to peer review and academic communities.
+            </p>
+          </div>
+
+          <div class="split-2">
+            <div class="card">
+              <div class="card-title">Teaching & lab assistance</div>
+              <div class="card-meta">Programming, cybersecurity, digital forensics</div>
+              <ul class="list-bullets">
+                <li>
+                  <span class="list-dot"></span>
+                  <span>Assisting in programming labs (e.g., Java, data structures), emphasizing clarity, performance, and problem-solving.</span>
+                </li>
+                <li>
+                  <span class="list-dot"></span>
+                  <span>Supporting cybersecurity, ethical hacking, and digital forensics labs, including log analysis, memory forensics, and web application testing.</span>
+                </li>
+                <li>
+                  <span class="list-dot"></span>
+                  <span>Providing feedback on lab reports, research-oriented assignments, and student projects.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Scholarly service & community</div>
+              <div class="card-meta">Peer review & mentoring</div>
+              <ul class="list-bullets">
+                <li>
+                  <span class="list-dot"></span>
+                  <span>Peer reviewer for security and emerging technology articles in Springer / METoR-related initiatives.</span>
+                </li>
+                <li>
+                  <span class="list-dot"></span>
+                  <span>Active involvement in cybersecurity clubs, cultural clubs, and music, contributing to an inclusive learning environment.</span>
+                </li>
+                <li>
+                  <span class="list-dot"></span>
+                  <span>Mentoring students interested in IoT security, digital forensics, ML/DL threat detection, ethical hacking, penetration testing, and AI-assisted investigation tools.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-kicker">Projects</div>
+            <h2 class="section-title">Ongoing & selected projects</h2>
+            <p class="section-subtitle">
+              A snapshot of selected research and applied projects across cybersecurity, digital forensics, machine learning, ethical hacking, and engineering.
+            </p>
+          </div>
+
+          <div class="cards-grid">
+            <div class="card">
+              <div class="card-title">Forensic analysis of Temu, AliExpress, and Shein</div>
+              <div class="project-meta">Digital forensics · Platform analysis</div>
+              <p>
+                Investigating digital trace patterns, privacy weaknesses, and potential anti-forensic behavior in major e-commerce platforms.
+              </p>
+              <div class="tags">
+                <span class="tag">Temu</span>
+                <span class="tag">AliExpress</span>
+                <span class="tag">Shein</span>
+                <span class="tag">Platform forensics</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Deep learning leaf multiple disease detection</div>
+              <div class="project-meta">Computer vision · Agriculture</div>
+              <p>
+                Designing and evaluating deep learning models to detect and classify multiple plant leaf diseases for agricultural decision support.
+              </p>
+              <div class="tags">
+                <span class="tag">Deep learning</span>
+                <span class="tag">Leaf disease</span>
+                <span class="tag">Computer vision</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">YOLO-11 live accident object detection from CCTV</div>
+              <div class="project-meta">Real-time vision · Smart cities</div>
+              <p>
+                Real-time detection of accidents and hazardous events in CCTV streams using YOLO-11, with emphasis on reliability and latency.
+              </p>
+              <div class="tags">
+                <span class="tag">YOLO-11</span>
+                <span class="tag">Accident detection</span>
+                <span class="tag">CCTV</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Comparative analysis of forensic tools</div>
+              <div class="project-meta">Tool evaluation · DFIR</div>
+              <p>
+                Benchmarking tools such as Autopsy, FTK Imager, and CAINE across acquisition reliability, efficiency, and artefact completeness.
+              </p>
+              <div class="tags">
+                <span class="tag">Autopsy</span>
+                <span class="tag">FTK Imager</span>
+                <span class="tag">CAINE</span>
+                <span class="tag">Tool benchmarking</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Anonymous search engines & onion-based browsers</div>
+              <div class="project-meta">Digital forensics · Anonymous services</div>
+              <p>
+                Experimental study of how anonymous search engines and onion-based browsers leave traces on client systems and networks.
+              </p>
+              <div class="tags">
+                <span class="tag">Tor</span>
+                <span class="tag">Anonymous search</span>
+                <span class="tag">Artefact recovery</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">ML/DL models for phishing & ransomware detection</div>
+              <div class="project-meta">Machine learning · Threat detection</div>
+              <p>
+                Designing supervised and deep learning models to detect phishing, malicious URLs, and ransomware activity using network and content features.
+              </p>
+              <div class="tags">
+                <span class="tag">ML</span>
+                <span class="tag">Ransomware</span>
+                <span class="tag">Phishing</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Offensive security labs for ethical hacking</div>
+              <div class="project-meta">Education · Offensive security</div>
+              <p>
+                Developing lab scenarios using Nmap, Burp Suite, Metasploit, and OWASP methodologies to teach ethical hacking and penetration testing.
+              </p>
+              <div class="tags">
+                <span class="tag">Ethical hacking</span>
+                <span class="tag">Pen-testing</span>
+                <span class="tag">OWASP Top-10</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">LLM-aided forensic tooling & report generation</div>
+              <div class="project-meta">LLMs · Automation</div>
+              <p>
+                Prototyping workflows where LLMs help with log triage, artefact summarization, and structured report drafting.
+              </p>
+              <div class="tags">
+                <span class="tag">LLM</span>
+                <span class="tag">Forensic reports</span>
+                <span class="tag">Automation</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Early engineering projects</div>
+              <div class="project-meta">Embedded systems · Control</div>
+              <p>
+                Automated water tank alarm system using microcontroller, digital rail gate system design, solar-powered vehicle concepts, and automatic traffic signal design.
+              </p>
+              <div class="tags">
+                <span class="tag">Embedded</span>
+                <span class="tag">Control systems</span>
+                <span class="tag">Smart transport</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Technical skills & toolchain</div>
+              <div class="project-meta">Platforms · Tools · Soft skills</div>
+              <p>
+                Hands-on experience with cybersecurity, digital forensics, ethical hacking, penetration testing, data analysis, and cloud environments.
+              </p>
+              <div class="tags">
+                <span class="tag">Ethical hacking</span>
+                <span class="tag">Pen-testing</span>
+                <span class="tag">Burp Suite</span>
+                <span class="tag">Nmap</span>
+                <span class="tag">Metasploit</span>
+                <span class="tag">Wireshark</span>
+                <span class="tag">OWASP</span>
+                <span class="tag">FTK Imager</span>
+                <span class="tag">CAINE</span>
+                <span class="tag">AWS EC2</span>
+                <span class="tag">Python</span>
+                <span class="tag">SQL</span>
+                <span class="tag">Linux & PowerShell</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-kicker">Contact</div>
+            <h2 class="section-title">Collaboration & supervision</h2>
+            <p class="section-subtitle">
+              I welcome research collaborations, student supervision, and industry–academia partnerships related to cybersecurity, digital forensics, IoT/CPS, ethical hacking, penetration testing, and AI-driven threat analysis.
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <div>
+              <div class="contact-details">
+                <div>
+                  <div class="contact-label">Email</div>
+                  <a href="mailto:mxd147@shsu.edu">mxd147@shsu.edu</a> ·
+                  <a href="mailto:madhabdas.2109@gmail.com">madhabdas.2109@gmail.com</a>
+                </div>
+                <div>
+                  <div class="contact-label">Location</div>
+                  Huntsville, Texas, USA · Originally from Bangladesh
+                </div>
+              </div>
+              <div class="social-chips">
+                <a class="social-chip" href="https://www.linkedin.com/in/madhab-chandra-das-b1023841" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a class="social-chip" href="https://scholar.google.com/citations?hl=en&user=5Te6-LAAAAAJ&view_op=list_works" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+                <a class="social-chip" href="https://www.researchgate.net/profile/Madhab-Chandra-Das-2" target="_blank" rel="noopener noreferrer">ResearchGate</a>
+              </div>
+            </div>
+
+            <div class="contact-right">
+              <strong>Example collaboration topics:</strong><br />
+              • Forensic analysis of anonymous services and onion-based networks<br />
+              • E-commerce forensics (Temu, AliExpress, Shein)<br />
+              • Ethical hacking & penetration testing labs<br />
+              • ML/DL models for phishing, ransomware, and malicious traffic<br />
+              • IoT/CPS forensic case studies and testbeds<br />
+              • LLM-assisted tools for investigation and reporting
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span>© <span id="year"></span> Madhab Chandra Das. All rights reserved.</span>
+        <span>Personal website for cybersecurity, digital forensics, and AI-assisted research.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Dynamic year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  const burger = document.getElementById("burger");
+  const mobileNav = document.getElementById("mobileNav");
+
+  burger.addEventListener("click", () => {
+    mobileNav.classList.toggle("open");
+  });
+
+  mobileNav.addEventListener("click", (e) => {
+    if (e.target.tagName.toLowerCase() === "a") {
+      mobileNav.classList.remove("open");
+    }
+  });
+</script>
 </body>
 </html>
